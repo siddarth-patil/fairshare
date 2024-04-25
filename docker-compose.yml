@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+    db:
+        image: mariadb
+        restart: always
+        container_name: mariadb-fairshare
+        hostname: mariadb-fairshare
+        ports:
+            - "3306:3306"
+        env_file: .env
