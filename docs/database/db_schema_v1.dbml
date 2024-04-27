@@ -1,0 +1,39 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table users {
+    user_id uniqueidentifier [primary key]
+    username varchar
+    email varchar
+    password hash
+    created_at timestamp
+}
+
+Table groups {
+    group_id uniqueidentifier [primary key]
+    group_name varchar
+    created_by uniqueidentifier  [ref: > users.user_id]
+    created_at timestamp
+}
+
+Table group_users{
+    group_id uniqueidentifier [ref: > groups.group_id]
+    user_id uniqueidentifier [ref: > users.user_id]
+}
+
+Table expense {
+    expense_id uniqueidentifier [primary key]
+    group_id uniqueidentifier [null, ref: > groups.group_id]
+    user_id uniqueidentifier [ref: > users.user_id]
+    amount float
+    description varchar
+    created_at timestamp
+}
+
+Table split{
+    split_id uniqueidentifier
+    expense_id uniqueidentifier [ref: > expense.expense_id]
+    user_id uniqueidentifier [ref: > users.user_id]
+    group_id uniqueidentifier [null, ref: > groups.group_id]
+    amount float
+}
