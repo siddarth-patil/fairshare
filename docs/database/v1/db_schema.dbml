@@ -23,8 +23,8 @@ Table group_users{
 
 Table expense {
     expense_id uniqueidentifier [primary key]
-    group_id uniqueidentifier [null, ref: > groups.group_id]
     user_id uniqueidentifier [ref: > users.user_id]
+    group_id uniqueidentifier [null, ref: > groups.group_id]
     amount float
     description varchar
     created_at timestamp
